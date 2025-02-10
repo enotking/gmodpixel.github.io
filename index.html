@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pixel Battle</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .canvas {
+            border: 1px solid black;
+            width: 500px;
+            height: 500px;
+            display: grid;
+            grid-template-columns: repeat(50, 1fr);
+            grid-template-rows: repeat(50, 1fr);
+        }
+        .pixel {
+            width: 100%;
+            height: 100%;
+            background-color: white;
+            border: 1px solid #ddd;
+        }
+    </style>
+</head>
+<body>
+    <div class="canvas" id="canvas"></div>
+
+    <script>
+        const canvas = document.getElementById('canvas');
+        const size = 50; // 50x50 grid
+
+        for (let i = 0; i < size * size; i++) {
+            const pixel = document.createElement('div');
+            pixel.classList.add('pixel');
+            pixel.addEventListener('click', function () {
+                pixel.style.backgroundColor = pixel.style.backgroundColor === 'red' ? 'white' : 'red';
+                sendPixelData(i, pixel.style.backgroundColor);
+            });
+            canvas.appendChild(pixel);
+        }
+
+        function sendPixelData(index, color) {
+            // Отправка данных на сервер или в Garry's Mod (через Lua)
+            fetch(`https://example.com/updatePixel?index=${index}&color=${color}`);
+        }
+    </script>
+</body>
+</html>
